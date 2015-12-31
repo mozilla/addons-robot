@@ -1,0 +1,7 @@
+base:
+  build: .
+  command: supervisord -n -c /code/config/supervisor.conf
+  volumes:
+    - src:/code
+  ports:
+    - "80:5000"

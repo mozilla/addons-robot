@@ -1,0 +1,6 @@
+.env
+*.py[co]
+src/logs/*
+src/cache/*
+supervisord.pid
+.ipython
