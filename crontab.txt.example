@@ -1,0 +1,1 @@
+0 10 * * * source ~/.addons-robot-env; cd /Users/andy/sandboxes/addons-bots/close_pull_request && python close.py mozilla/addon-sdk >> ../logs/close_pull_request.log 2>&1
