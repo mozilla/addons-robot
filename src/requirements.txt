@@ -1,6 +1,0 @@
-python-dateutil
-icalendar
-pytz
-requests
-Flask
-supervisor
