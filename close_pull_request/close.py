@@ -18,8 +18,9 @@ log.info('Running close.py: {}'.format(datetime.datetime.now()))
 before = datetime.date(2016,5,1)
 
 message = (
- "Please use Bugzilla to submit patches as per "
- "https://github.com/{}/blob/master/CONTRIBUTING.md"
+ "Thank you for submitting your pull request. However pull requests are not "
+ "accepted on github as per the contribution guidelines. Please use Bugzilla "
+ "to submit patches instead: https://github.com/{}/blob/master/CONTRIBUTING.md"
 )
 
 repos = 'https://api.github.com/repos/'
