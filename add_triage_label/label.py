@@ -56,7 +56,8 @@ def triage_issue(location, issue):
     labels.append('triaged')
     res = requests.patch(
         url,
-        json={'labels': labels}
+        json={'labels': labels},
+        auth=(GITHUB_USERNAME, GITHUB_TOKEN)
     )
     res.raise_for_status()
 
