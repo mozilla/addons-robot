@@ -21,6 +21,7 @@ root = 'https://api.github.com/'
 
 developers = [
     'krupa',
+    'kumar303',
     'diox',
     'andymckay',
     'eviljeff',
