@@ -27,6 +27,10 @@ dir_mapping = [
     [
         os.path.join(source_root, 'browser/components/extensions/schemas'),
         os.path.join(dest_root, 'gecko/browser'),
+    ],
+    [
+        os.path.join(source_root, 'mobile/android/components/extensions/schemas'),
+        os.path.join(dest_root, 'gecko/mobile'),
     ]
 ]
 
