@@ -118,15 +118,17 @@ def make_commit(target, uid):
         if changed:
             bump_version()
             git('branch changes-{}'.format(uid))
+            git('checkout changes-{}'.format(uid))
             git('commit -m "changes from addons-robot {}" -a'.format(uid))
             git('push {} changes-{}'.format(target, uid))
+            git('checkout master')
             return True
 
     return False
 
 
 if __name__ == '__main__':
-    uid = str(time.time())
+    uid = str(int(time.time()))
     setup()
     copy_files()
     commit = make_commit('addons-robot', uid)
