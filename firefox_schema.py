@@ -13,7 +13,7 @@ handler = logging.StreamHandler(sys.stderr)
 log.addHandler(handler)
 log.setLevel(logging.DEBUG)
 
-project_root = '../other_projects'
+project_root = 'other_projects'
 source_root = 'gecko-dev'
 source_repo = 'git@github.com:mozilla/gecko-dev.git'
 dest_root = 'webextension-schema'
