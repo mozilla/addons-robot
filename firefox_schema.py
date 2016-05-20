@@ -96,11 +96,11 @@ def copy_files():
 
 
 def bump_version():
-    package = os.path.join(project_root, dest_root, 'package.json')
-    data = json.load(open(package, 'r'))
+    # Note: assumes already in this dir.
+    data = json.load(open('package.json', 'r'))
     x, y, z = data['version'].split('.')
     data['version'] = '{}.{}.{}'.format(x, int(y)+1, z)
-    json.dump(data, open(package, 'w'), indent=2)
+    json.dump(data, open('package.json', 'w'), indent=2)
 
 
 def make_commit(target, uid):
