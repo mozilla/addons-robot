@@ -1,5 +1,6 @@
 import contextlib
 import datetime
+import json
 import logging
 import os
 import requests
@@ -51,6 +52,8 @@ def make_pull_request(commit, uid):
         },
         auth=(GITHUB_USERNAME, GITHUB_TOKEN)
     )
+    res.raise_for_status()
+    log.debug('pull request created')
 
 
 @contextlib.contextmanager
@@ -80,15 +83,24 @@ def setup():
         git('pull')
         git('config user.name "Addons Robot"')
         git('config user.email "addons-dev-automation+github@mozilla.com"')
+        git('remote add addons-robot git@github.com:addons-robot/webextension-schema.git')
 
 
 def copy_files():
     for src_dir, dest_dir in dir_mapping:
-        for root, dirname, filenames in os.walk(src_dir):
+        for root, dirname, filenames in os.walk(os.path.join(project_root, src_dir)):
             for filename in filenames:
                 full = os.path.join(root, filename)
                 if full.endswith('.json'):
-                    shutil.copy(full, dest_dir)
+                    shutil.copy(full, os.path.join(project_root, dest_dir))
+
+
+def bump_version():
+    package = os.path.join(project_root, dest_root, 'package.json')
+    data = json.load(open(package, 'r'))
+    x, y, z = data['version'].split('.')
+    data['version'] = '{}.{}.{}'.format(x, int(y)+1, z)
+    json.dump(data, open(package, 'w'), indent=2)
 
 
 def make_commit(target, uid):
@@ -104,6 +116,7 @@ def make_commit(target, uid):
             changed = True
 
         if changed:
+            bump_version()
             git('branch changes-{}'.format(uid))
             git('commit -m "changes from addons-robot {}" -a'.format(uid))
             git('push {} changes-{}'.format(target, uid))
