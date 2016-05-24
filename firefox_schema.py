@@ -82,12 +82,12 @@ def setup():
     with temp_chdir(project_root):
         if not os.path.exists(dest_root):
             git('clone {}'.format(dest_repo))
+            git('config user.name "Addons Robot"')
+            git('config user.email "addons-dev-automation+github@mozilla.com"')
+            git('remote add addons-robot git@github.com:addons-robot/webextension-schema.git')
 
     with temp_chdir(os.path.join(project_root, dest_root)):
         git('pull')
-        git('config user.name "Addons Robot"')
-        git('config user.email "addons-dev-automation+github@mozilla.com"')
-        git('remote add addons-robot git@github.com:addons-robot/webextension-schema.git')
 
 
 def copy_files():
