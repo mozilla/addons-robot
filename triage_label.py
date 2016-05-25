@@ -46,7 +46,9 @@ def list_issues(location):
     # https://developer.github.com/v3/search/
     # Note this defaults to open pull requests.
     url = root + 'search/issues'
-    labels = 'state:open+type:issue+-label:triaged+repo:{}'.format(location)
+    labels = (
+        'state:open+type:issue+-label:triaged+-label:"pull request ready"'
+        '+-label:"in progress"+repo:{}'.format(location))
     # Because github fails when you pass these as params and escape them.
     url = url + '?q={}&sort:created'.format(labels)
     _list_issues(url)
