@@ -8,6 +8,8 @@ import shutil
 import sys
 import time
 
+from utils import notify_irc
+
 log = logging.getLogger('pull')
 handler = logging.StreamHandler(sys.stderr)
 log.addHandler(handler)
