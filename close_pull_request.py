@@ -2,6 +2,9 @@ import datetime
 import logging
 import os
 import sys
+
+from utils import notify_irc
+
 import requests
 
 log = logging.getLogger()
@@ -63,6 +66,7 @@ def close_pull_request(location, pull):
         auth=(GITHUB_USERNAME, GITHUB_TOKEN)
     )
     res.raise_for_status()
+    notify_irc('Closed pull request {}#{}'.format(location, pull['number']))
 
 
 if __name__ == '__main__':
