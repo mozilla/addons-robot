@@ -1,0 +1,33 @@
+import irc.bot
+
+channel = '#amo-bots'
+nickname = 'addons-robot'
+server = 'irc.mozilla.org'
+
+
+class TestBot(irc.bot.SingleServerIRCBot):
+    def __init__(self, channel, nickname, server, port=6667):
+        irc.bot.SingleServerIRCBot.__init__(self, [(server, port)], nickname, nickname)
+        self.channel = channel
+
+    def on_welcome(self, c, e):
+        c.join(self.channel)
+        for msg in self.msgs:
+            self.connection.privmsg(self.channel, msg)
+        self.die()
+
+
+def notify_irc(*msgs):
+    bot = TestBot(channel, nickname, server)
+    if isinstance(msgs, str):
+        print msgs
+        msgs = [msgs]
+    bot.msgs = msgs
+    try:
+        bot.start()
+    except SystemExit:
+        print 'exiting'
+
+
+if __name__=='__main__':
+    notify_irc('some test', 'messages')

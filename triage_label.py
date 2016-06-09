@@ -5,6 +5,8 @@ import re
 import requests
 import sys
 
+from utils import notify_irc
+
 log = logging.getLogger()
 handler = logging.StreamHandler(sys.stderr)
 log.addHandler(handler)
@@ -78,6 +80,7 @@ def triage_issue(location, issue):
         auth=(GITHUB_USERNAME, GITHUB_TOKEN)
     )
     res.raise_for_status()
+    notify_irc('Triage label added to {}#{}'.format(location, issue['number']))
 
 
 if __name__ == '__main__':

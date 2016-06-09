@@ -138,3 +138,6 @@ if __name__ == '__main__':
     commit = make_commit('addons-robot', uid)
     if commit:
         make_pull_request(commit, uid)
+        notify_irc('Made pull request for {}'.format(dest_root))
+    else:
+        notify_irc('No changes needed for {}'.format(dest_root))
