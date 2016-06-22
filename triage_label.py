@@ -86,6 +86,7 @@ def triage_issue(location, issue):
 if __name__ == '__main__':
     location = sys.argv[1]
     assert '/' in location
+    notify_irc('Checking for bugs to triage in {}'.format(location))
     log.info('Checking: {}'.format(location))
     list_issues(location)
     for issue in issues:

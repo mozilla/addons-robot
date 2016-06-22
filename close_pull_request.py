@@ -72,6 +72,7 @@ def close_pull_request(location, pull):
 if __name__ == '__main__':
     location = sys.argv[1]
     assert '/' in location
+    notify_irc('Checking for pull requests to close in {}'.format(location))
     log.info('Checking: {}'.format(location))
     pulls = list_pull_requests(location)
     log.info('Found: {} pull requests since {}'.format(len(pulls), before))
