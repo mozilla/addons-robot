@@ -1,3 +1,5 @@
+import re
+
 import irc.bot
 
 channel = '#amo-bots'
@@ -27,6 +29,11 @@ def notify_irc(*msgs):
         bot.start()
     except SystemExit:
         print 'exiting'
+
+
+def parse_link_headers(header):
+    rx = '\<(.*?)>; rel="(\w+)"(?:,)'
+    return dict([(v, k) for k, v in re.findall(rx, header)])
 
 
 if __name__=='__main__':
