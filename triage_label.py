@@ -1,11 +1,10 @@
 import datetime
 import logging
 import os
-import re
 import requests
 import sys
 
-from utils import notify_irc
+from utils import notify_irc, parse_link_headers
 
 log = logging.getLogger()
 handler = logging.StreamHandler(sys.stderr)
@@ -38,10 +37,6 @@ developers = [
 
 
 issues = []
-
-def parse_link_headers(header):
-    rx = '\<(.*?)>; rel="(\w+)"(?:,)'
-    return dict([(v, k) for k, v in re.findall(rx, header)])
 
 
 def list_issues(location):
