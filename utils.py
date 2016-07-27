@@ -1,3 +1,4 @@
+import time
 import re
 
 import irc.bot
@@ -16,6 +17,8 @@ class TestBot(irc.bot.SingleServerIRCBot):
         c.join(self.channel)
         for msg in self.msgs:
             self.connection.privmsg(self.channel, msg)
+
+        time.sleep(1)
         self.die()
 
 
