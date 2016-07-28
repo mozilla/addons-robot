@@ -33,6 +33,7 @@ developers = [
     'tofumatt',
     'mstriemer',
     'muffinresearch',
+    'jvillalobos',
 ]
 
 
