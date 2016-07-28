@@ -116,7 +116,6 @@ if __name__ == '__main__':
     endpoint = sys.argv[2]
     assert endpoint.startswith('https://')
 
-    notify_irc('Checking for pull requests closed in {}'.format(location))
     log.info('Checking: {}'.format(location))
 
     pulls = list_pull_requests(location)
@@ -127,8 +126,7 @@ if __name__ == '__main__':
     for pull in pulls:
         if check_deployed(pull, commit_hash, commits_since):
             comment_on_pull_request(location, pull)
-            log.info('Commented pull request: {}'.format(pull['number']))
+            notify_irc('Commented on pull request: {}'.format(pull['number']))
+            log.info('Commented on pull request: {}'.format(pull['number']))
         else:
             log.info('Pull request not deployed: {}'.format(pull['number']))
-
-    notify_irc('Checking for pull requests completed.')
