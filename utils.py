@@ -25,7 +25,6 @@ class TestBot(irc.bot.SingleServerIRCBot):
 def notify_irc(*msgs):
     bot = TestBot(channel, nickname, server)
     if isinstance(msgs, str):
-        print msgs
         msgs = [msgs]
     bot.msgs = msgs
     try:
@@ -35,6 +34,9 @@ def notify_irc(*msgs):
 
 
 def parse_link_headers(header):
+    if not header:
+        return {}
+
     rx = '\<(.*?)>; rel="(\w+)"(?:,)'
     return dict([(v, k) for k, v in re.findall(rx, header)])
 
