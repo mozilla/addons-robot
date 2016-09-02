@@ -53,8 +53,10 @@ def list_pull_requests(location):
     res.raise_for_status()
     pull_requests = []
     for pull_request in res.json():
-        if pull_request['number'] < 3179:
-            # Don't comment on old pull requests.
+        # Don't comment on pull requests that weren't merged.
+        # https://github.com/mozilla/addons-bots/issues/9
+        if not pull_request['merged_at']:
+            log.info('No merge, ignoring.')
             continue
 
         # Note we aren't going to try and paginate through the list, we'll
