@@ -1,2 +1,2 @@
 requests
-irc
+irc==15.1.1
